@@ -1,18 +1,28 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  BeforeInsert,
+  BaseEntity,
+} from "typeorm";
+import { v4 as uuidv4 } from "uuid";
 
-@Entity()
-export class User {
+@Entity("users")
+export class User extends BaseEntity {
+  @PrimaryColumn("uuid")
+  id: string;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column("varchar", { unique: true, length: 255 })
+  email: string;
 
-    @Column()
-    firstName: string;
+  // @Column("boolean")
+  // confirm?: boolean;
 
-    @Column()
-    lastName: string;
+  @Column("text")
+  password: string;
 
-    @Column()
-    age: number;
-
+  @BeforeInsert()
+  addId() {
+    this.id = uuidv4();
+  }
 }
