@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "scripts": {
+    "test": "jest",
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon -x 'yarn start' -e js,ts,json,graphql",
     "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
@@ -25,5 +26,9 @@
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "3.9.5"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   }
 }
