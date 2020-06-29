@@ -1,7 +1,20 @@
 type Query {
   hello(name: String): String!
+  getAllProducts: [Product!]!
 }
 
 type Mutation {
   register(email: String!, password: String!): String!
+  createProduct(data: createProductInput!): Product!
+}
+
+input createProductInput {
+  title: String!
+  description: String!
+}
+
+type Product {
+  id: ID!
+  title: String!
+  description: String!
 }
