@@ -7,4 +7,3 @@ export class Product extends BaseEntity {
   @Column({ type: "text" }) title: string;
   @Column("varchar", { length: 255 }) description: string;
 }
-"".join();

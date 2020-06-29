@@ -7,6 +7,17 @@ export const resolvers: ResolverMap = {
   Query: {
     hello: (_: any, { name }) => `Hello ${name || "World"}`,
     getAllProducts: async () => await Product.find(),
+    getProduct: async (_, { id }) => {
+      // Product.re;
+      try {
+        const product = await Product.findOne(id);
+        if (!product) throw new Error("Product not found");
+        return product;
+      } catch (err) {
+        // log console.error();
+        throw new Error(err.message);
+      }
+    },
   },
   Mutation: {
     register: async (_: any, { email, password }) => {
@@ -17,13 +28,6 @@ export const resolvers: ResolverMap = {
     },
     async createProduct(_, { data: { title, description } }) {
       return await Product.create({ title, description }).save();
-    },
-    getProduct: async (_, { id }) => {
-      try {
-        const product = await Product.findById(id);
-      } catch (err) {
-        throw new Error("Invalid user ID");
-      }
     },
   },
 };

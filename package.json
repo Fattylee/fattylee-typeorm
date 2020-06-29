@@ -4,8 +4,8 @@
   "description": "Awesome project developed with TypeORM.",
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/index.ts",
-    "start:dev": "nodemon -x 'yarn start' -e js,ts,json,graphql -i **/*.test.ts",
+    "start": "NODE_ENV=development ts-node src/index.ts",
+    "start:dev": " nodemon -x 'yarn start' -e js,ts,json,graphql -i **/*.test.ts",
     "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 type Query {
   hello(name: String): String!
   getAllProducts: [Product!]!
+  getProduct(id: ID!): Product
 }
 
 type Mutation {
