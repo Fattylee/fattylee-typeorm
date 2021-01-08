@@ -3,7 +3,12 @@ import { ResolverMap } from "./types/graphql-utils";
 import { User } from "./entity/User";
 import { Product } from "./entity/Product";
 
-export const resolvers: ResolverMap = {
+type tap = {
+  [baba: string]: {
+    [key: string]: (_: any, a: any, b: any, c: any) => any;
+  };
+};
+export const resolvers: tap | ResolverMap = {
   Query: {
     hello: (_: any, { name }) => `Hello ${name || "World"}`,
     getAllProducts: async () => await Product.find(),

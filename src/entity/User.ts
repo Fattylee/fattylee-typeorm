@@ -1,7 +1,8 @@
 import {
+  PrimaryGeneratedColumn,
   Entity,
   Column,
-  PrimaryColumn,
+  // PrimaryColumn,
   BeforeInsert,
   BaseEntity,
 } from "typeorm";
@@ -9,7 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 
 @Entity("users")
 export class User extends BaseEntity {
-  @PrimaryColumn("uuid")
+  // @PrimaryColumn("uuid")
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column("varchar", { unique: true, length: 255 })

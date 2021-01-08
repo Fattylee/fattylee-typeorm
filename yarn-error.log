@@ -1,47 +1,79 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add --dev ts-jest @types/jest jest
+  /home/fattylee/.nvm/versions/node/v14.4.0/bin/node /usr/share/yarn/bin/yarn.js start
 
 PATH: 
-  /home/fattylee/anaconda3/bin:/home/fattylee/.config/yarn/global/node_modules/.bin:/home/fattylee/bin:/home/fattylee/anaconda3/bin:/home/fattylee/.config/yarn/global/node_modules/.bin:/home/fattylee/bin:/home/fattylee/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/fattylee/.rvm/bin:/home/fattylee/.rvm/bin:/home/fattylee/.rvm/bin
+  /home/fattylee/workspace/fattylee-typeorm/node_modules/.bin:/tmp/yarn--1598101012643-0.6491543671159812:/home/fattylee/workspace/fattylee-typeorm/node_modules/.bin:/home/fattylee/.config/yarn/link/node_modules/.bin:/home/fattylee/.yarn/bin:/home/fattylee/.nvm/versions/node/v14.4.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/fattylee/.nvm/versions/node/v14.4.0/lib/node_modules/npm/bin/node-gyp-bin:/home/fattylee/.nvm/versions/node/v14.4.0/bin/node_modules/npm/bin/node-gyp-bin:/home/fattylee/anaconda3/bin:/home/fattylee/.config/yarn/global/node_modules/.bin:/home/fattylee/bin:/home/fattylee/.local/bin:/home/fattylee/.nvm/versions/node/v14.4.0/bin:/home/fattylee/anaconda3/bin:/home/fattylee/.config/yarn/global/node_modules/.bin:/home/fattylee/bin:/home/fattylee/.local/bin:/home/fattylee/.local/bin:/home/fattylee/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/fattylee/.rvm/bin:/home/fattylee/.rvm/bin:/home/fattylee/.rvm/bin
 
 Yarn version: 
   1.21.1
 
 Node version: 
-  13.14.0
+  14.4.0
 
 Platform: 
   linux x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
+  Error: package.json: EIO: i/o error, write
+      at writeSync (fs.js:694:3)
+      at SyncWriteStream._write (internal/fs/sync_write_stream.js:24:3)
+      at writeOrBuffer (_stream_writable.js:352:12)
+      at SyncWriteStream.Writable.write (_stream_writable.js:303:10)
+      at ConsoleReporter.warn (/usr/share/yarn/lib/cli.js:96713:17)
+      at warn (/usr/share/yarn/lib/cli.js:51520:23)
+      at module.exports.exports.default (/usr/share/yarn/lib/cli.js:37358:7)
+      at /usr/share/yarn/lib/cli.js:51531:51
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:310:30)
 
 npm manifest: 
   {
     "name": "fattylee-typeorm",
     "version": "0.0.1",
     "description": "Awesome project developed with TypeORM.",
-    "devDependencies": {
-      "@types/node": "^14.0.14",
-      "@types/uuid": "^8.0.0",
-      "gql2ts": "^1.10.1",
-      "ts-node": "8.10.2",
-      "tslint": "^6.1.2",
-      "tslint-config-prettier": "^1.18.0",
-      "typescript": "3.9.5"
+    "scripts": {
+      "test": "jest",
+      "start": "NODE_ENV=development ts-node src/index.ts",
+      "start:dev": " nodemon -x 'yarn start' -e js,ts,json,graphql -i **/*.test.ts",
+      "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
     },
     "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "graphql-request": "2.1.0-next.1",
       "graphql-yoga": "^1.18.3",
       "pg": "^8.2.1",
       "reflect-metadata": "^0.1.13",
       "typeorm": "0.2.25",
       "uuid": "^8.2.0"
     },
-    "scripts": {
-      "start": "ts-node src/index.ts",
-      "start:dev": "nodemon -x 'yarn start' -e js,ts,json,graphql",
-      "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
+    "devDependencies": {
+      "@types/bcryptjs": "^2.4.2",
+      "@types/jest": "^26.0.3",
+      "@types/node": "^14.0.14",
+      "@types/uuid": "^8.0.0",
+      "gql2ts": "^1.10.1",
+      "jest": "^26.1.0",
+      "ts-jest": "^26.1.1",
+      "ts-node": "8.10.2",
+      "tslint": "^6.1.2",
+      "tslint-config-prettier": "^1.18.0",
+      "typescript": "3.9.5"
+    },
+    "jest": {
+      "moduleFileExtensions": [
+        "js",
+        "json",
+        "ts"
+      ],
+      "rootDir": "src",
+      "testRegex": ".test.ts$",
+      "transform": {
+        "^.+\\.(t|j)s$": "ts-jest"
+      },
+      "testPathIgnorePatterns": [],
+      "coverageDirectory": "./coverage",
+      "testEnvironment": "node",
+      "setupFilesAfterEnv": []
     }
   }
 
@@ -1489,6 +1521,13 @@ Lockfile:
       object-assign "^4"
       vary "^1"
   
+  cross-fetch@^3.0.4:
+    version "3.0.5"
+    resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.5.tgz#2739d2981892e7ab488a7ad03b92df2816e03f4c"
+    integrity sha512-FFLcLtraisj5eteosnX1gf01qYDCOc4fDy0+euOt8Kn9YBY2NtXL/pCoYPavw24NIQkQqm5ZOLsGD5Zzj0gyew==
+    dependencies:
+      node-fetch "2.6.0"
+  
   cross-spawn@^6.0.0:
     version "6.0.5"
     resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
@@ -2160,6 +2199,13 @@ Lockfile:
     integrity sha512-fJ1Y0Ck5ctmfaQFoWv7vNnVP7We19P3miVmOT85YPrjpzbMYv0wPfxm4Zjt8nnqXr0KU9nGW53tz3K7/Lvzxtw==
     dependencies:
       graphql-playground-html "1.6.12"
+  
+  graphql-request@2.1.0-next.1:
+    version "2.1.0-next.1"
+    resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-2.1.0-next.1.tgz#d0771d814ebcb39ea67208da12e301f3f5d6a80d"
+    integrity sha512-9Qr+z4FCzxwFrnG9BE366v9KcgRXLv2bmFkj3RHfSQNDgPHCUM2mA83bwjhgxg4jig/F8X/pcceOZPwRkMleKQ==
+    dependencies:
+      cross-fetch "^3.0.4"
   
   graphql-subscriptions@^0.5.8:
     version "0.5.8"
@@ -3366,6 +3412,11 @@ Lockfile:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
     integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+  
+  node-fetch@2.6.0:
+    version "2.6.0"
+    resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+    integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
   
   node-int64@^0.4.0:
     version "0.4.0"

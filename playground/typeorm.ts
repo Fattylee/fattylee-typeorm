@@ -18,10 +18,7 @@ class GroceryList extends BaseEntity {
   @Column() title: string;
   @CreateDateColumn() createAt: Date;
 
-  @OneToMany(
-    () => Item,
-    (item) => item.grocery
-  )
+  @OneToMany(() => Item, (item) => item.grocery)
   items: Item[];
 }
 
@@ -31,10 +28,7 @@ class Item extends BaseEntity {
   @Column("varchar", { length: 255 }) name: string;
   @Column({ type: "money" }) price: number;
 
-  @ManyToOne(
-    () => GroceryList,
-    (grocery) => grocery.items
-  )
+  @ManyToOne(() => GroceryList, (grocery) => grocery.items)
   grocery: GroceryList;
 }
 
@@ -45,10 +39,7 @@ class User extends BaseEntity {
   @Column() last_name: string;
   @CreateDateColumn() createdAt: Date;
 
-  @OneToMany(
-    () => Todo,
-    (todo) => todo.owner
-  )
+  @OneToMany(() => Todo, (todo) => todo.owner)
   @JoinColumn()
   todos: string[];
 }
@@ -85,7 +76,7 @@ class Todo extends BaseEntity {
     logging: true,
     synchronize: true,
     entities: [GroceryList, Item, User, Todo],
-    // dropSchema: true,
+    dropSchema: true,
   });
   console.log("Database connected successfully");
   // const product = Product.create({ title: "title one" });
